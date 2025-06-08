@@ -14,7 +14,6 @@ function StopWatch() {
       clearInterval(intervalRef.current);
     }
 
-    // Cleanup interval on unmount
     return () => clearInterval(intervalRef.current);
   }, [isRunning]);
 
@@ -34,12 +33,12 @@ function StopWatch() {
   const minutes = Math.floor(timeInSeconds / 60);
   const seconds = timeInSeconds % 60;
 
+  const formattedTime = `${minutes}:${seconds < 10 ? `0${seconds}` : seconds}`;
+
   return (
     <div>
       <h1>Stopwatch</h1>
-      <div>
-        Time : {minutes}:{seconds < 10 ? `0${seconds}` : seconds}
-      </div>
+      <div>Time: {formattedTime}</div>
       {isRunning ? (
         <button onClick={handleStop}>Stop</button>
       ) : (
